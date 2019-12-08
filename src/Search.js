@@ -9,7 +9,10 @@ state = {
 		data: [],
     inputValue: '',
     searchArray: [],
-    pictureData: []
+    pictureData: [],
+    photoArray: [],
+    actualCityData: [],
+    actualPhotoData: []
 	};
 
 componentDidMount() {
@@ -25,58 +28,74 @@ componentDidMount() {
 
 
 makeRequest = () => {
-    let allCities = [];
-    let actualData = [];
+    let actuallyPhotoData = [];
+    let actualPhotoData = [];
+    let actualCityData = [];
+
+
     const place = this.state.inputValue;
-    const laPhotoID = "4efe34736da1cd035752078a";
     const url = `https://api.foursquare.com/v2/venues/explore?categoryId=4deefb944765f83613cdba6e&client_id=JDFOE0O0TWPFCHRHQAHMUKIUQJT32XANBRVKV0Q5KTDZM2FY&client_secret=NLBE1S1XICQWIUNIHBDXMWVM2N4NXAXQ1N5EMXTNLVRZMBPE&v=20180323&limit=8&near=${place}`;
 
-    // fetch call for foursquare venues
+// fetch call 1 for foursquare venues
       fetch(url).then((response) => {
         return response.json();
       }).then((data) => {
-        this.setState({
-          data: data
-        })
-        console.log(this.state.data);
-        allCities = data.response.groups[0].items;
+
+        let allCities = data.response.groups[0].items;
 
         for (let key of allCities) {
+          // console.log(allCities)
             let searchData = {
               title: key.venue.name,
               city: key.venue.location.city,
               country: key.venue.location.country,
               photoId: key.venue.id
             }
-            actualData.push(searchData);
-            };
-        this.setState({
-          searchArray: actualData
-        })
+
+            let venueIdArray = {
+              photoId: key.venue.id
+            }
+            actualCityData.push(searchData);
+            actualPhotoData.push(venueIdArray);
+          }; /* end of for loop */
+
+        for (let i = 0; i < actualPhotoData.length; i++) {
+          console.log('hi')
 
 
-        for (let i = 0; i < this.state.searchArray.length; i++) {
-          // console.log(this.state.searchArray[i].photoId)
-          const venueId = this.state.searchArray[i].photoId;
-
-          const photoUrl = `https://api.foursquare.com/v2/venues/${venueId}/photos?/&client_id=JDFOE0O0TWPFCHRHQAHMUKIUQJT32XANBRVKV0Q5KTDZM2FY&client_secret=NLBE1S1XICQWIUNIHBDXMWVM2N4NXAXQ1N5EMXTNLVRZMBPE&v=20180323`;
+          var venueId = actualPhotoData[i].photoId;
+          let photoUrl = `https://api.foursquare.com/v2/venues/${venueId}/photos?/&client_id=JDFOE0O0TWPFCHRHQAHMUKIUQJT32XANBRVKV0Q5KTDZM2FY&client_secret=NLBE1S1XICQWIUNIHBDXMWVM2N4NXAXQ1N5EMXTNLVRZMBPE&v=20180323`;
+  // Fetch call 2
           fetch(photoUrl).then((response) => {
             return response.json();
           }).then((photoData) => {
-            this.setState({
-              pictureData: [...this.state.pictureData, {photoData: photoData}]
-            })
-            console.log(this.state.pictureData);
-            console.log(this.state.searchArray);
-          })
-        };
+            // console.log(photoData);
+            actuallyPhotoData.push({
+              returnPhotoId: photoData.meta.requestId,
+              returnVenueId: i,
+              prefix: photoData.response.photos.items[0].prefix,
+              size: '300x500',
+              suffix: photoData.response.photos.items[0].suffix
+            });
 
-      }) /* end of the then block */
+            actuallyPhotoData.sort((a,b) => a.returnVenueId - b.returnVenueId);
+        }
+      )}
 
+        var photoAndSearchData = [];
 
-    
+          for (let j = 0; j < actualCityData.length; j++) {
+            console.log(actuallyPhotoData, actualCityData)
+            // photoAndSearchData.push({
+            //   key1: actualCityData[key],
+            //   key2: actuallyPhotoData[key]
+            // });
+            //   console.log(photoAndSearchData)
+          }
+    })
 
   }; /*end of makeRequest method */
+
 
 
   handleChange = (e) => {
