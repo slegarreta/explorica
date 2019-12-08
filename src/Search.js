@@ -94,7 +94,7 @@ makeRequest = () => {
           }
     })
 
-  }; /*end of makeRequest method */
+  }; /*end of the makeRequest method */
 
 
 
