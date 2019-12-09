@@ -92,7 +92,7 @@ makeRequest = () => {
             // });
             //   console.log(photoAndSearchData)
           }
-    // })
+    })
     // this.setState({
     //   cardArray: photoAndSearchData
     // })
