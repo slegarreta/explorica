@@ -36,7 +36,7 @@ makeRequest = () => {
     const place = this.state.inputValue;
     const url = `https://api.foursquare.com/v2/venues/explore?categoryId=4deefb944765f83613cdba6e&client_id=JDFOE0O0TWPFCHRHQAHMUKIUQJT32XANBRVKV0Q5KTDZM2FY&client_secret=NLBE1S1XICQWIUNIHBDXMWVM2N4NXAXQ1N5EMXTNLVRZMBPE&v=20180323&limit=8&near=${place}`;
 
-// fetch call 1 for foursquare venues
+// first fetch call to foursquare returning 8 venues for location searched (picture data not included in response)
       fetch(url).then((response) => {
         return response.json();
       }).then((data) => {
@@ -44,7 +44,6 @@ makeRequest = () => {
         let allCities = data.response.groups[0].items;
 
         for (let key of allCities) {
-          // console.log(allCities)
             let searchData = {
               title: key.venue.name,
               city: key.venue.location.city,
@@ -57,7 +56,9 @@ makeRequest = () => {
             }
             actualCityData.push(searchData);
             actualPhotoData.push(venueIdArray);
-          }; /* end of for loop */
+          }; /* end of for loop, placed response data in 2 arrays, need venueIdArray for 2nd fetch call (loop of 8 fetch calls) */
+
+  // for loop for second fetch call (loop of 8 fetch calls) to foursquare returning photos for 8 venues, fetch calls made with venue IDs returned with first fetch call
 
         for (let i = 0; i < actualPhotoData.length; i++) {
           console.log('hi')
@@ -65,7 +66,7 @@ makeRequest = () => {
 
           var venueId = actualPhotoData[i].photoId;
           let photoUrl = `https://api.foursquare.com/v2/venues/${venueId}/photos?/&client_id=JDFOE0O0TWPFCHRHQAHMUKIUQJT32XANBRVKV0Q5KTDZM2FY&client_secret=NLBE1S1XICQWIUNIHBDXMWVM2N4NXAXQ1N5EMXTNLVRZMBPE&v=20180323`;
-  // Fetch call 2
+
           fetch(photoUrl).then((response) => {
             return response.json();
           }).then((photoData) => {
@@ -82,16 +83,20 @@ makeRequest = () => {
         }
       )}
 
+// attempt to loop throught both arrays needed for render (names of cities, and pictures of cities) to merge into one array so it can be mapped in the render
+
         var photoAndSearchData = [];
 
           for (let j = 0; j < actualCityData.length; j++) {
             console.log(actuallyPhotoData, actualCityData)
-            // photoAndSearchData.push({
-            //   key1: actualCityData[key],
-            //   key2: actuallyPhotoData[key]
-            // });
-            //   console.log(photoAndSearchData)
+            photoAndSearchData.push({
+              key1: actualCityData[j],
+              key2: actuallyPhotoData[j]
+            });
+// actuallyPhotoData does not push to photoAndSearchData. even though it appears on line 91 console.log, it does not appear in console.log on line 98. perhaps the 2nd loop of fetch calls takes too long and i need to use async/await?
           }
+          console.log(photoAndSearchData)
+
     })
     // this.setState({
     //   cardArray: photoAndSearchData
