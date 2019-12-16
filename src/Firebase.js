@@ -1,8 +1,8 @@
-import React from 'react';
+// import React from 'react';
 import firebase from 'firebase';
 
 const config = {
-  apiKey: "AIzaSyAHLHnY7aoCPC2Sjl7fEhhstbm3ps52-T4",
+  apiKey: process.env.REACT_APP_API_KEY,
   authDomain: "jsr-709-sam.firebaseapp.com",
   databaseURL: "https://jsr-709-sam.firebaseio.com",
   projectId: "jsr-709-sam",
