@@ -1,11 +1,9 @@
-import React from 'react';
-import './App.css';
-import Nav from './Nav';
-import Search from './Search';
-import Favorites from './Favorites';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-
-
+import React from "react";
+import "./App.css";
+import Nav from "./Nav";
+import Search from "./Search";
+import Favorites from "./Favorites";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
