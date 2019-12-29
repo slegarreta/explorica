@@ -23,7 +23,7 @@ export default class Search extends React.Component {
     this.setState({
       database: database
     });
-    // let favoriteSavedArray = database.ref('favoriteSavedFirebase')
+    let favoriteSavedArray = database.ref('favoriteSavedFirebase')
   }
 
   makeRequest = async () => {
@@ -32,7 +32,7 @@ export default class Search extends React.Component {
     let actualCityData = [];
 
     const place = this.state.inputValue;
-    const url = `https://api.foursquare.com/v2/venues/explore?categoryId=4deefb944765f83613cdba6e&client_id=JDFOE0O0TWPFCHRHQAHMUKIUQJT32XANBRVKV0Q5KTDZM2FY&client_secret=NLBE1S1XICQWIUNIHBDXMWVM2N4NXAXQ1N5EMXTNLVRZMBPE&v=20180323&limit=1&near=${place}`;
+    const url = `https://api.foursquare.com/v2/venues/explore?categoryId=4deefb944765f83613cdba6e&client_id=JDFOE0O0TWPFCHRHQAHMUKIUQJT32XANBRVKV0Q5KTDZM2FY&client_secret=NLBE1S1XICQWIUNIHBDXMWVM2N4NXAXQ1N5EMXTNLVRZMBPE&v=20180323&limit=2&near=${place}`;
 
     // first fetch call to foursquare returning 8 venues for location searched (picture data not included in response)
     fetch(url)
@@ -46,6 +46,7 @@ export default class Search extends React.Component {
           let searchData = {
             title: key.venue.name,
             city: key.venue.location.city,
+
             country: key.venue.location.country,
             photoId: key.venue.id
           };
