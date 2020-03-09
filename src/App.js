@@ -12,18 +12,13 @@ function App() {
       <div>
         <Nav />
         <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/Search" component={Search} />
+          <Route path="/" exact component={Search} />
           <Route path="/Favorites" component={Favorites} />
         </Switch>
       </div>
     </BrowserRouter>
   );
 }
-const Home = () => (
-  <div>
-    <h1>Home Page</h1>
-  </div>
-);
+
 
 export default App;

@@ -50,10 +50,12 @@ export default class Favorites extends React.Component {
       return <Card place={place} delete={this.delete} update={this.update} />;
     });
     return (
-      <div>
-        <h1>Favorites</h1>
-        <div className="row justify-content-center">{favoritePlaces}</div>
+      <main className="container p-3">
+        <div>
+          <h2>Favorites</h2>
+          <div className="row justify-content-center">{favoritePlaces}</div>
       </div>
+      </main>
     );
   }
 }

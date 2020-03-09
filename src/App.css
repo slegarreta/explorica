@@ -1,34 +1,87 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Source Sans Pro', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
 .App {
   text-align: center;
 }
 
 nav {
+  margin: 0px;
+
+}
+
+ul {
+
+}
+
+li {
+  list-style: none;
+}
+
+.description {
+  text-align: center;
+}
+
+.navbar {
+  background-color: #1A181B;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  min-height: 10vh;
+  min-height: 8vh;
+
 }
 
 .nav-links {
-  width: 40%;
   display: flex;
   justify-content: space-around;
-  align-items: center;
-  list-style: none;
+  width: 30%;
+}
+
+.hamburger-menu {
+  display: none;
+  cursor: pointer;
+}
+
+.hamburger-menu div {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 5px;
+}
+
+a {
+  color: white;
+}
+
+a:hover {
+  color: #f3beac;
+  text-decoration: none;
 }
 
 h1 {
   margin: 40px 0;
   text-align: center;
+  color: white;
 }
 
 form {
-    margin: 30px 0;
+  margin: 100px 0;
 }
 
-h2 {
-  margin: 30px 0;
+form input {
+  width: 40%;
 }
+
 
 .card {
   box-shadow: 0 0 5px 2px rgba(0,0,0,.10);
@@ -38,14 +91,15 @@ h2 {
   align-items: center;
   font-size: 16px;
   font-weight: bold;
-
+  height: 50px;
+  margin: 5px;
 }
 
 .location {
   font-size: 16px;
   font-weight: bold;
   color: #0F8B8D;
-  margin-top: 10px;
+  /* margin-top: 10px; */
 }
 
 button {
@@ -53,7 +107,7 @@ button {
 }
 
 .btn-primary {
-  margin: 5px;
+  margin: 0 5px;
 }
 
 .btn-success {
@@ -66,6 +120,69 @@ button {
   border-color: #D67C00;
 }
 
-img {
-  height: 250px;
+h2 {
+  margin-top: 10vh;
+  text-align: center;
+  font-size: 3rem;
+  color: #1A181B;
+  margin-bottom: 50px;
+  line-height: 1.5
+}
+
+.col-lg-4 {
+  padding: 0;
+  margin: 0;
+}
+
+image {
+  /* height: 500px;
+  width: 300px; */
+  background-size: cover;
+}
+
+.col-lg-4 p {
+  text-align: center;
+}
+
+@media screen and (max-width:768px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .nav-links {
+    position: absolute;
+    right: 0px;
+    height: 100vh;
+    top: 8vh;
+    background-color: #1A181B;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in;
+  }
+
+  .nav-links li {
+    color: white;
+  }
+
+  .hamburger-menu {
+    display: block;
+  }
+}
+
+.nav-active {
+  transform: translateX(0%);
+}
+
+@keyframes navLinkFade {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
 }

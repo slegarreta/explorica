@@ -1,4 +1,5 @@
 import React from "react";
+import "./App.css";
 
 export default class Card extends React.Component {
   state = {
@@ -17,14 +18,10 @@ export default class Card extends React.Component {
 
   render() {
     return (
-      <div className="card col-lg-4 p-2 m-1">
-        <p className="row justify-content-center title">
-          {this.props.place.item.title}
-        </p>
-        <img src="https://www.cartrip.co.za/blog/wp-content/uploads/2017/01/road-trip-travel_500x300_71461060508.jpg" />
-        <p className="row justify-content-center location">
-          {this.props.place.item.city}, {this.props.place.item.country}
-        </p>
+      <div className="card col-lg-4 pb-2 m-1">
+        <img alt="travel-locations" src={`${this.props.place.item.photo.prefix}` + `${this.props.place.item.photo.size}` + `${this.props.place.item.photo.suffix}`}/>
+        <p className="row justify-content-center title">{this.props.place.item.title}</p>
+        <p className="row justify-content-center location">{this.props.place.item.city}, {this.props.place.item.country}</p>
         <p>{this.props.place.item.notes}</p>
 
         <input
