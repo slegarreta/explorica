@@ -5,7 +5,7 @@
   "dependencies": {
     "bootstrap": "^4.3.1",
     "dotenv": "^8.2.0",
-    "firebase": "^7.2.1",
+    "firebase": "^10.9.0",
     "prettier": "^1.19.1",
     "react": "^16.10.2",
     "react-browser-router": "^2.1.2",
